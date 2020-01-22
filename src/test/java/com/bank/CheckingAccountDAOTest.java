@@ -1,31 +1,42 @@
-package com.bank.service;
+package com.bank;
 
 import com.bank.entity.CheckingAccountEntity;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class CheckingAccountServiceTest {
+class CheckingAccountDAOTest {
 
     @Autowired
-    private CheckingAccountService service;
+    private CheckingAccountDAO checkingAccountDAO;
 
     @Test
-    @DisplayName("Should get checking account")
-    void test() {
-        var actual = service.getAllCheckingAccounts();
+    void shouldReturnAllCheckingAccounts() {
+        var actual = checkingAccountDAO.getAccounts();
+        var expected = buildCheckingAccounts();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldReturnCheckingAccountById() {
+        var actual = checkingAccountDAO.getAccountById(1);
         var expected = buildCheckingAccount();
         assertEquals(expected, actual);
     }
 
-    private List<CheckingAccountEntity> buildCheckingAccount() {
+    @Test
+    void shouldReturnCheckingAccountBySocialNumber() {
+        var actual = checkingAccountDAO.getAccountBySocialNumber("028.899.220-20");
+        var expected = buildCheckingAccount();
+        assertEquals(expected, actual);
+    }
+
+    private List<CheckingAccountEntity> buildCheckingAccounts() {
         var checkingAccountEntity1 = new CheckingAccountEntity();
         checkingAccountEntity1.setId(1);
         checkingAccountEntity1.setFirstName("Aliko");
@@ -48,6 +59,17 @@ class CheckingAccountServiceTest {
         checkingAccountEntity3.setSocialNumber("028.899.220-22");
 
         return List.of(checkingAccountEntity1, checkingAccountEntity2, checkingAccountEntity3);
+    }
+
+    private CheckingAccountEntity buildCheckingAccount() {
+        var checkingAccountEntity1 = new CheckingAccountEntity();
+        checkingAccountEntity1.setId(1);
+        checkingAccountEntity1.setFirstName("Aliko");
+        checkingAccountEntity1.setLastName("Dangote");
+        checkingAccountEntity1.setTotalSavings(15);
+        checkingAccountEntity1.setSocialNumber("028.899.220-20");
+
+        return checkingAccountEntity1;
     }
 
 }

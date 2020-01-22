@@ -17,10 +17,27 @@ public class CheckingAccountDAO {
     private JdbcTemplate jdbcTemplate;
 
     public List<CheckingAccountEntity> getAccounts() {
-        return jdbcTemplate.query("select * from checking_account", new CheckingAccountMapper());
+        String sql = "select * from checking_account";
+        return jdbcTemplate.query(sql, new CheckingAccountMapper());
     }
 
-    class CheckingAccountMapper implements RowMapper<CheckingAccountEntity> {
+    public CheckingAccountEntity getAccountById(int id){
+        String sql = "select * from checking_account where id=?";
+        return jdbcTemplate.queryForObject(sql, new Object[] { id }, new CheckingAccountMapper());
+    }
+
+    public CheckingAccountEntity getAccountBySocialNumber(String socialNumber){
+        String sql = "select * from checking_account where social_number=?";
+        return jdbcTemplate.queryForObject(sql, new Object[] { socialNumber }, new CheckingAccountMapper());
+    }
+
+    public int updateCheckingAccount(CheckingAccountEntity checkingAccountEntity){
+        return jdbcTemplate.update("update checking_account " + " set first_name = ?, last_name = ?, social_number = ?, total_savings = ?" + " where id = ?",
+                checkingAccountEntity.getFirstName(), checkingAccountEntity.getLastName(), checkingAccountEntity.getSocialNumber(), checkingAccountEntity.getTotalSavings(), checkingAccountEntity.getId());
+
+    }
+
+    static class CheckingAccountMapper implements RowMapper<CheckingAccountEntity> {
         @Override
         public CheckingAccountEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
             CheckingAccountEntity checkingAccountEntity = new CheckingAccountEntity();

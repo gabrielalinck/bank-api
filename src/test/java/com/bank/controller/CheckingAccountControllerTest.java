@@ -29,14 +29,14 @@ class CheckingAccountControllerTest {
         checkingAccountEntity1.setFirstName("Aliko");
         checkingAccountEntity1.setLastName("Dangote");
         checkingAccountEntity1.setTotalSavings(15);
-        checkingAccountEntity1.setSocialNumber("028.899.220-22");
+        checkingAccountEntity1.setSocialNumber("028.899.220-20");
 
         var checkingAccountEntity2 = new CheckingAccountEntity();
         checkingAccountEntity2.setId(2);
         checkingAccountEntity2.setFirstName("Bill");
         checkingAccountEntity2.setLastName("Gates");
         checkingAccountEntity2.setTotalSavings(15);
-        checkingAccountEntity2.setSocialNumber("028.899.220-22");
+        checkingAccountEntity2.setSocialNumber("028.899.220-21");
 
         var checkingAccountEntity3 = new CheckingAccountEntity();
         checkingAccountEntity3.setId(3);
