@@ -27,15 +27,9 @@ public class CheckingAccountEntity {
     private String socialNumber;
 
     @Column
-    private Double totalSavings;
+    private Integer totalSavings;
 
-    public CheckingAccountEntity(int id, String firstName, String lastName, String socialNumber, Double totalSavings) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.socialNumber = socialNumber;
-        this.totalSavings = totalSavings;
-    }
+    public CheckingAccountEntity() {}
 
     public int getId() {
         return id;
@@ -69,11 +63,11 @@ public class CheckingAccountEntity {
         this.socialNumber = socialNumber;
     }
 
-    public Double getTotalSavings() {
+    public Integer getTotalSavings() {
         return totalSavings;
     }
 
-    public void setTotalSavings(Double totalSavings) {
+    public void setTotalSavings(Integer totalSavings) {
         this.totalSavings = totalSavings;
     }
 
