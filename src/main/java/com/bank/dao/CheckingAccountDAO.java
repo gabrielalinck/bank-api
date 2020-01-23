@@ -1,4 +1,4 @@
-package com.bank;
+package com.bank.dao;
 
 import com.bank.entity.CheckingAccountEntity;
 import org.springframework.beans.factory.annotation.Autowired;

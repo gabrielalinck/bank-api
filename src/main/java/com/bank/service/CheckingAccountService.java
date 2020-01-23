@@ -1,6 +1,6 @@
 package com.bank.service;
 
-import com.bank.CheckingAccountDAO;
+import com.bank.dao.CheckingAccountDAO;
 import com.bank.entity.CheckingAccountEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

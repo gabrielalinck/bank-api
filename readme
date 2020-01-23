@@ -1,1 +1,6 @@
 BANK API
+
+This code is divided in three parts: the Checking Account, the Bank Posting and the Transactions between them.
+
+Checking Account -> The Checking Account is an entity that contains the main properties that are needed in this context: the name of the owner, the social number (equal to cpf in Brazil) and the total savings (total cash that he has now). The account can be only updated, for security purposes.
+
