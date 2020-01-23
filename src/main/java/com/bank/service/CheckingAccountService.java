@@ -20,4 +20,16 @@ public class CheckingAccountService {
     public List<CheckingAccountEntity> getAllCheckingAccounts() {
         return dao.getAccounts();
     }
+
+    public CheckingAccountEntity getCheckingAccountById(Integer id) {
+        return dao.getAccountById(id);
+    }
+
+    public CheckingAccountEntity getCheckingAccountBySocialNumber(String socialNumber) {
+        return dao.getAccountBySocialNumber(socialNumber);
+    }
+
+    public Boolean updateCheckingAccount(CheckingAccountEntity account) {
+        return dao.updateCheckingAccount(account) == 1;
+    }
 }

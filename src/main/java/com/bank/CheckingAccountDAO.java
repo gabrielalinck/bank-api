@@ -31,7 +31,7 @@ public class CheckingAccountDAO {
         return jdbcTemplate.queryForObject(sql, new Object[] { socialNumber }, new CheckingAccountMapper());
     }
 
-    public int updateCheckingAccount(CheckingAccountEntity checkingAccountEntity){
+    public Integer updateCheckingAccount(CheckingAccountEntity checkingAccountEntity){
         return jdbcTemplate.update("update checking_account " + " set first_name = ?, last_name = ?, social_number = ?, total_savings = ?" + " where id = ?",
                 checkingAccountEntity.getFirstName(), checkingAccountEntity.getLastName(), checkingAccountEntity.getSocialNumber(), checkingAccountEntity.getTotalSavings(), checkingAccountEntity.getId());
 

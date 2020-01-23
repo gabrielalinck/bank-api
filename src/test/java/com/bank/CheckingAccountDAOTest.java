@@ -2,21 +2,22 @@ package com.bank;
 
 import com.bank.entity.CheckingAccountEntity;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class CheckingAccountDAOTest {
 
-    @Autowired
-    private CheckingAccountDAO checkingAccountDAO;
+    private CheckingAccountDAO checkingAccountDAO = mock(CheckingAccountDAO.class);
 
     @Test
     void shouldReturnAllCheckingAccounts() {
+        when(checkingAccountDAO.getAccounts()).thenReturn(buildCheckingAccounts());
         var actual = checkingAccountDAO.getAccounts();
         var expected = buildCheckingAccounts();
         assertEquals(expected, actual);
@@ -24,16 +25,43 @@ class CheckingAccountDAOTest {
 
     @Test
     void shouldReturnCheckingAccountById() {
+        int total = 15;
+        when(checkingAccountDAO.getAccountById(1)).thenReturn(buildCheckingAccount(total));
         var actual = checkingAccountDAO.getAccountById(1);
-        var expected = buildCheckingAccount();
+        var expected = buildCheckingAccount(total);
         assertEquals(expected, actual);
     }
 
     @Test
     void shouldReturnCheckingAccountBySocialNumber() {
+        int total = 15;
+        when(checkingAccountDAO.getAccountBySocialNumber("028.899.220-20"))
+                .thenReturn(buildCheckingAccount(total));
         var actual = checkingAccountDAO.getAccountBySocialNumber("028.899.220-20");
-        var expected = buildCheckingAccount();
+        var expected = buildCheckingAccount(total);
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldUpdateCheckingAccount() {
+        int total = 20;
+        when(checkingAccountDAO.updateCheckingAccount(buildCheckingAccount(total))).thenReturn(1);
+        when(checkingAccountDAO.getAccountById(1)).thenReturn(buildCheckingAccount(total));
+        checkingAccountDAO.updateCheckingAccount(buildCheckingAccount(total));
+        var rowUpdated = checkingAccountDAO.getAccountById(1);
+        var expected = buildCheckingAccount(total);
+        assertEquals(expected, rowUpdated);
+    }
+
+    @Test
+    void shouldntUpdateCheckingAccount() {
+        int total = 20;
+        when(checkingAccountDAO.updateCheckingAccount(buildCheckingAccount(total))).thenReturn(0);
+        when(checkingAccountDAO.getAccountById(1)).thenReturn(buildCheckingAccount(15));
+        checkingAccountDAO.updateCheckingAccount(buildCheckingAccount(total));
+        var rowUpdated = checkingAccountDAO.getAccountById(1);
+        var expected = buildCheckingAccount(15);
+        assertEquals(expected, rowUpdated);
     }
 
     private List<CheckingAccountEntity> buildCheckingAccounts() {
@@ -61,15 +89,15 @@ class CheckingAccountDAOTest {
         return List.of(checkingAccountEntity1, checkingAccountEntity2, checkingAccountEntity3);
     }
 
-    private CheckingAccountEntity buildCheckingAccount() {
-        var checkingAccountEntity1 = new CheckingAccountEntity();
-        checkingAccountEntity1.setId(1);
-        checkingAccountEntity1.setFirstName("Aliko");
-        checkingAccountEntity1.setLastName("Dangote");
-        checkingAccountEntity1.setTotalSavings(15);
-        checkingAccountEntity1.setSocialNumber("028.899.220-20");
+    private CheckingAccountEntity buildCheckingAccount(Integer total) {
+        var checkingAccountEntity = new CheckingAccountEntity();
+        checkingAccountEntity.setId(1);
+        checkingAccountEntity.setFirstName("Aliko");
+        checkingAccountEntity.setLastName("Dangote");
+        checkingAccountEntity.setTotalSavings(total);
+        checkingAccountEntity.setSocialNumber("028.899.220-20");
 
-        return checkingAccountEntity1;
+        return checkingAccountEntity;
     }
 
 }
