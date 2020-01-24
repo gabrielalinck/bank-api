@@ -6,4 +6,8 @@ INSERT INTO checking_account (first_name, last_name, total_savings, social_numbe
 INSERT INTO checking_account (first_name, last_name, total_savings, social_number) VALUES ('Bill', 'Gates', 15, '028.899.220-21');
 INSERT INTO checking_account (first_name, last_name, total_savings, social_number) VALUES ('Folrunsho', 'Alakija', 15, '028.899.220-22');
 
-CREATE TABLE checking_account (posting_id INT AUTO_INCREMENT PRIMARY KEY, posting_date VARCHAR(250), origin_account INT, recipient_account INT, total_value INT);
+CREATE TABLE bank_posting (posting_id INT AUTO_INCREMENT PRIMARY KEY, posting_date VARCHAR(250), origin_account INT, recipient_account INT, total_value INT);
+
+INSERT INTO bank_posting (posting_date, origin_account, recipient_account, total_value) VALUES ('2020-01-01', 1, 2, 20);
+INSERT INTO bank_posting (posting_date, origin_account, recipient_account, total_value) VALUES ('2020-01-03', 3, 2, 250);
+INSERT INTO bank_posting (posting_date, origin_account, recipient_account, total_value) VALUES ('2020-01-05', 2, 1, 50);

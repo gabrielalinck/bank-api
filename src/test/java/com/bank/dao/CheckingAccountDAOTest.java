@@ -1,6 +1,5 @@
-package com.bank;
+package com.bank.dao;
 
-import com.bank.dao.CheckingAccountDAO;
 import com.bank.entity.CheckingAccountEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
