@@ -48,17 +48,17 @@ public class BankPostingDAO {
     }
 
     public BankPostingEntity getBankPostingByOriginAccount(Integer originAccount) {
-        String sql = "select * from bank_posting where origin_account=?";
+        String sql = "select * from bank_posting where origin_account=? limit 1";
         return jdbcTemplate.queryForObject(sql, new Object[]{originAccount}, new BankPostingDAO.BankPostingMapper());
     }
 
     public BankPostingEntity getBankPostingByRecipientAccount(Integer recipientAccount) {
-        String sql = "select * from bank_posting where recipient_account=?";
+        String sql = "select * from bank_posting where recipient_account=? limit 1";
         return jdbcTemplate.queryForObject(sql, new Object[]{recipientAccount}, new BankPostingDAO.BankPostingMapper());
     }
 
     public Integer updateBankPosting(BankPostingEntity bankPostingEntity) {
-        return jdbcTemplate.update("update bank_posting " + " set posting_date = ?, origin_account = ?, recipient_account = ?, total_value = ?" + " where id = ?",
+        return jdbcTemplate.update("update bank_posting " + " set posting_date = ?, origin_account = ?, recipient_account = ?, total_value = ?" + " where posting_id = ?",
                 bankPostingEntity.getPostingDate(), bankPostingEntity.getOriginAccount(), bankPostingEntity.getRecipientAccount(), bankPostingEntity.getTotalValue(), bankPostingEntity.getPostingId());
 
     }

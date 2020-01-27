@@ -22,7 +22,7 @@ public class TransferService {
     public BankPostingEntity transfer(Integer originAccountId, Integer recipientAccountId, Integer transferValue) throws Exception {
         var originAccount = checkingAccountService.getCheckingAccountById(originAccountId);
 
-        if(verifyTransferValue(transferValue) && verifyOriginAccount(originAccount, transferValue)) {
+        if(verify(originAccount, recipientAccountId, transferValue)) {
             updateOriginAccount(originAccount, transferValue);
             updateRecipientAccount(recipientAccountId, transferValue);
             var bankPostingId = createBankPosting(originAccountId, recipientAccountId, transferValue);
@@ -33,12 +33,12 @@ public class TransferService {
 
     }
 
-    private Boolean verifyTransferValue(Integer transferValue) {
-        return transferValue > 0;
-    }
+    private Boolean verify(CheckingAccountEntity originAccount, Integer recipientAccountId, Integer transferValue) {
+        if(transferValue < 0) return false;
+        if(originAccount.getTotalSavings() <= transferValue) return false;
+        if(originAccount.getId() == recipientAccountId) return false;
 
-    private Boolean verifyOriginAccount(CheckingAccountEntity originAccount, Integer transferValue) {
-        return originAccount.getTotalSavings() >= transferValue;
+        return true;
     }
 
     private void updateOriginAccount(

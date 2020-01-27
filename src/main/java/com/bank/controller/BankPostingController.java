@@ -48,4 +48,10 @@ public class BankPostingController {
     public Boolean updateBankPosting(@RequestBody BankPostingEntity entity){
         return service.updateBankPosting(entity);
     }
+
+    @PutMapping("/bank-posting/create")
+    @ResponseBody
+    public Integer createBankPosting(@RequestBody BankPostingEntity entity){
+        return service.createBankPosting(entity);
+    }
 }
