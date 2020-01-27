@@ -73,6 +73,28 @@ class BankPostingDAOTest {
         assertEquals(expected, rowUpdated);
     }
 
+    @Test
+    void shouldCreateBankPosting() {
+        int total = 20;
+        when(bankPostingDAO.createBankPosting(buildBankPosting(total))).thenReturn(4);
+        when(bankPostingDAO.getBankPostingById(4)).thenReturn(buildBankPosting(total));
+        bankPostingDAO.createBankPosting(buildBankPosting(total));
+        var rowUpdated = bankPostingDAO.getBankPostingById(4);
+        var expected = buildBankPosting(total);
+        assertEquals(expected, rowUpdated);
+    }
+
+    @Test
+    void shouldntCreateBankPosting() {
+        int total = 20;
+        when(bankPostingDAO.createBankPosting(buildBankPosting(total))).thenReturn(4);
+        when(bankPostingDAO.getBankPostingById(4)).thenReturn(buildBankPosting(15));
+        bankPostingDAO.createBankPosting(buildBankPosting(total));
+        var rowUpdated = bankPostingDAO.getBankPostingById(4);
+        var expected = buildBankPosting(15);
+        assertEquals(expected, rowUpdated);
+    }
+
     private List<BankPostingEntity> buildBankPostings() {
         var bankPostingEntity1 = new BankPostingEntity();
         bankPostingEntity1.setPostingId(1);

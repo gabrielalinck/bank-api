@@ -36,4 +36,8 @@ public class BankPostingService {
     public Boolean updateBankPosting(BankPostingEntity bankPostingEntity) {
         return dao.updateBankPosting(bankPostingEntity) == 1;
     }
+
+    public Integer createBankPosting(BankPostingEntity bankPostingEntity) {
+        return dao.createBankPosting(bankPostingEntity);
+    }
 }
