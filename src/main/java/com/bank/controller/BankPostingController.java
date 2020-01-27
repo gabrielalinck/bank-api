@@ -45,13 +45,13 @@ public class BankPostingController {
 
     @PutMapping("/bank-posting/update")
     @ResponseBody
-    public Boolean updateBankPosting(@RequestBody BankPostingEntity entity){
-        return service.updateBankPosting(entity);
+    public Boolean updateBankPosting(@RequestBody BankPostingEntity bankPostingEntity){
+        return service.updateBankPosting(bankPostingEntity);
     }
 
     @PutMapping("/bank-posting/create")
     @ResponseBody
-    public Integer createBankPosting(@RequestBody BankPostingEntity entity){
-        return service.createBankPosting(entity);
+    public Integer createBankPosting(@RequestBody BankPostingEntity bankPostingEntity){
+        return service.createBankPosting(bankPostingEntity);
     }
 }

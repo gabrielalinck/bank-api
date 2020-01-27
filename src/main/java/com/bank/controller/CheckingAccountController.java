@@ -39,8 +39,8 @@ public class CheckingAccountController {
 
     @PutMapping("/accounts/account/update")
     @ResponseBody
-    public Boolean updateCheckingAccount(@RequestBody CheckingAccountEntity entity){
-        return service.updateCheckingAccount(entity);
+    public Boolean updateCheckingAccount(@RequestBody CheckingAccountEntity checkingAccountEntity){
+        return service.updateCheckingAccount(checkingAccountEntity);
     }
 
 }
